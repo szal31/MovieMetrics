@@ -1,0 +1,16 @@
+{
+  "name": "MovieMetrics",
+  "dataColors": [
+    "#1F6FB2",
+    "#E07B22",
+    "#5B6770",
+    "#7FA7CF",
+    "#F2B880",
+    "#A3AAB0",
+    "#2E8B8B",
+    "#8C6BB1"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#1B2A41",
+  "tableAccent": "#1F6FB2"
+}

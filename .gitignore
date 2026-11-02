@@ -1,0 +1,8 @@
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+# outdated drafts, superseded by the FULL chapter file
+Chapter 3 - 3.3 to 3.5 (MovieMetrics).docx
+3.6 to 3.10 with figures (MovieMetrics).docx
+# Office lock files
+~$*
+MovieMetrics.Report/*.pbix

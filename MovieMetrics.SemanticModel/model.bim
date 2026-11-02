@@ -1,0 +1,280 @@
+{
+  "compatibilityLevel": 1567,
+  "model": {
+    "culture": "en-US",
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "tables": [
+      {
+        "name": "movies_data",
+        "columns": [
+          {
+            "name": "Movie",
+            "dataType": "string",
+            "sourceColumn": "Movie"
+          },
+          {
+            "name": "Director",
+            "dataType": "string",
+            "sourceColumn": "Director"
+          },
+          {
+            "name": "Running time",
+            "dataType": "int64",
+            "sourceColumn": "Running time"
+          },
+          {
+            "name": "Actor 1",
+            "dataType": "string",
+            "sourceColumn": "Actor 1"
+          },
+          {
+            "name": "Actor 2",
+            "dataType": "string",
+            "sourceColumn": "Actor 2"
+          },
+          {
+            "name": "Actor 3",
+            "dataType": "string",
+            "sourceColumn": "Actor 3"
+          },
+          {
+            "name": "Genre",
+            "dataType": "string",
+            "sourceColumn": "Genre"
+          },
+          {
+            "name": "Budget",
+            "dataType": "decimal",
+            "sourceColumn": "Budget",
+            "formatString": "\\$#,0"
+          },
+          {
+            "name": "Box Office",
+            "dataType": "decimal",
+            "sourceColumn": "Box Office",
+            "formatString": "\\$#,0"
+          },
+          {
+            "name": "Actors Box Office %",
+            "dataType": "double",
+            "sourceColumn": "Actors Box Office %"
+          },
+          {
+            "name": "Director Box Office %",
+            "dataType": "double",
+            "sourceColumn": "Director Box Office %"
+          },
+          {
+            "name": "Earnings",
+            "dataType": "decimal",
+            "sourceColumn": "Earnings",
+            "formatString": "\\$#,0"
+          },
+          {
+            "name": "Oscar and Golden Globes nominations",
+            "dataType": "int64",
+            "sourceColumn": "Oscar and Golden Globes nominations"
+          },
+          {
+            "name": "Oscar and Golden Globes awards",
+            "dataType": "int64",
+            "sourceColumn": "Oscar and Golden Globes awards"
+          },
+          {
+            "name": "Release year",
+            "dataType": "int64",
+            "sourceColumn": "Release year",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "IMDb score",
+            "dataType": "double",
+            "sourceColumn": "IMDb score"
+          },
+          {
+            "type": "calculated",
+            "name": "ROI",
+            "dataType": "double",
+            "expression": "DIVIDE(movies_data[Earnings], movies_data[Budget]) * 100",
+            "formatString": "#,0.0\"%\""
+          },
+          {
+            "type": "calculated",
+            "name": "Profit Status",
+            "dataType": "string",
+            "expression": "IF(movies_data[Earnings] > 0, \"Profit\", IF(movies_data[Earnings] < 0, \"Loss\", \"Break-even\"))"
+          },
+          {
+            "type": "calculated",
+            "name": "Budget Category",
+            "dataType": "string",
+            "expression": "SWITCH(TRUE(), movies_data[Budget] < 20000000, \"Low\", movies_data[Budget] <= 80000000, \"Medium\", \"High\")",
+            "sortByColumn": "Budget Order"
+          },
+          {
+            "type": "calculated",
+            "name": "Budget Order",
+            "dataType": "int64",
+            "expression": "SWITCH(TRUE(), movies_data[Budget] < 20000000, 1, movies_data[Budget] <= 80000000, 2, 3)",
+            "isHidden": true,
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculated",
+            "name": "Decade",
+            "dataType": "string",
+            "expression": "FLOOR(movies_data[Release year], 10) & \"s\""
+          },
+          {
+            "type": "calculated",
+            "name": "IMDb Category",
+            "dataType": "string",
+            "expression": "SWITCH(TRUE(), movies_data[IMDb score] >= 7, \"High\", movies_data[IMDb score] >= 5, \"Medium\", \"Low\")",
+            "sortByColumn": "IMDb Order"
+          },
+          {
+            "type": "calculated",
+            "name": "IMDb Order",
+            "dataType": "int64",
+            "expression": "SWITCH(TRUE(), movies_data[IMDb score] >= 7, 1, movies_data[IMDb score] >= 5, 2, 3)",
+            "isHidden": true,
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculated",
+            "name": "Award Status",
+            "dataType": "string",
+            "expression": "IF(movies_data[Oscar and Golden Globes awards] > 0, \"Award winner\", \"No award\")"
+          },
+          {
+            "type": "calculated",
+            "name": "Budget Band ($M)",
+            "dataType": "double",
+            "expression": "FLOOR(movies_data[Budget], 20000000) / 1000000",
+            "formatString": "#,0",
+            "isHidden": true,
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculated",
+            "name": "Box Office Band ($M)",
+            "dataType": "double",
+            "expression": "MIN(FLOOR(movies_data[Box Office], 100000000) / 1000000, 1000)",
+            "formatString": "#,0",
+            "isHidden": true,
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculated",
+            "name": "IMDb Band",
+            "dataType": "double",
+            "expression": "FLOOR(movies_data[IMDb score], 0.5)",
+            "formatString": "0.0",
+            "isHidden": true,
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculated",
+            "name": "Running Time Band",
+            "dataType": "double",
+            "expression": "FLOOR(movies_data[Running time], 20)",
+            "formatString": "0",
+            "isHidden": true,
+            "summarizeBy": "none"
+          }
+        ],
+        "measures": [
+          {
+            "name": "Total Movies",
+            "expression": "COUNTROWS(movies_data)",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Total Budget",
+            "expression": "SUM(movies_data[Budget])",
+            "formatString": "\\$#,0"
+          },
+          {
+            "name": "Total Box Office",
+            "expression": "SUM(movies_data[Box Office])",
+            "formatString": "\\$#,0"
+          },
+          {
+            "name": "Total Earnings",
+            "expression": "SUM(movies_data[Earnings])",
+            "formatString": "\\$#,0"
+          },
+          {
+            "name": "Median ROI",
+            "expression": "MEDIAN(movies_data[ROI])",
+            "formatString": "#,0.0\"%\""
+          },
+          {
+            "name": "Loss %",
+            "expression": "DIVIDE(CALCULATE(COUNTROWS(movies_data), movies_data[Profit Status] = \"Loss\"), COUNTROWS(movies_data))",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Median Budget",
+            "expression": "MEDIAN(movies_data[Budget])",
+            "formatString": "\\$#,0"
+          },
+          {
+            "name": "Median Earnings",
+            "expression": "MEDIAN(movies_data[Earnings])",
+            "formatString": "\\$#,0"
+          },
+          {
+            "name": "Median ROI (25+ films)",
+            "expression": "IF(COUNTROWS(movies_data) >= 25, [Median ROI])",
+            "formatString": "#,0.0\"%\""
+          },
+          {
+            "name": "Top 10 Director Box Office",
+            "expression": "IF(ISINSCOPE(movies_data[Director]) && RANKX(ALLSELECTED(movies_data[Director]), [Total Box Office]) <= 10, [Total Box Office])",
+            "formatString": "\\$#,0"
+          },
+          {
+            "name": "Top 10 Actor Box Office",
+            "expression": "IF(ISINSCOPE(movies_data[Actor 1]) && RANKX(ALLSELECTED(movies_data[Actor 1]), [Total Box Office]) <= 10, [Total Box Office])",
+            "formatString": "\\$#,0"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "movies_data",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"C:\\DSC651\\MovieMetrics\\movies_data.csv\"), [Delimiter=\",\", Columns=16, Encoding=1252, QuoteStyle=QuoteStyle.Csv]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Cleaned Text\" = Table.TransformColumns(#\"Promoted Headers\", {{\"Movie\", each Text.Trim(Text.Clean(_)), type text}, {\"Director\", each Text.Trim(Text.Clean(_)), type text}, {\"Actor 1\", each Text.Trim(Text.Clean(_)), type text}, {\"Actor 2\", each Text.Trim(Text.Clean(_)), type text}, {\"Actor 3\", each Text.Trim(Text.Clean(_)), type text}, {\"Genre\", each Text.Trim(Text.Clean(_)), type text}}),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Cleaned Text\", {{\"Movie\", type text}, {\"Director\", type text}, {\"Running time\", Int64.Type}, {\"Actor 1\", type text}, {\"Actor 2\", type text}, {\"Actor 3\", type text}, {\"Genre\", type text}, {\"Budget\", Currency.Type}, {\"Box Office\", Currency.Type}, {\"Actors Box Office %\", type number}, {\"Director Box Office %\", type number}, {\"Earnings\", Currency.Type}, {\"Oscar and Golden Globes nominations\", Int64.Type}, {\"Oscar and Golden Globes awards\", Int64.Type}, {\"Release year\", Int64.Type}, {\"IMDb score\", type number}}, \"en-US\"),",
+                "    #\"Actor 3 Unknown\" = Table.TransformColumns(#\"Changed Type\", {\"Actor 3\", each if _ = null or _ = \"\" then \"Unknown\" else _, type text}),",
+                "    #\"Awards Zero\" = Table.ReplaceValue(#\"Actor 3 Unknown\", null, 0, Replacer.ReplaceValue, {\"Oscar and Golden Globes awards\"}),",
+                "    #\"Removed Exact Duplicates\" = Table.Distinct(#\"Awards Zero\"),",
+                "    #\"Sorted Box Office\" = Table.Buffer(Table.Sort(#\"Removed Exact Duplicates\", {{\"Box Office\", Order.Descending}, {\"Oscar and Golden Globes awards\", Order.Descending}, {\"Oscar and Golden Globes nominations\", Order.Descending}})),",
+                "    #\"Removed Conflicting Duplicates\" = Table.Distinct(#\"Sorted Box Office\", {\"Movie\", \"Release year\", \"Director\"}),",
+                "    #\"Fixed Invalid %\" = Table.TransformColumns(#\"Removed Conflicting Duplicates\", {\"Actors Box Office %\", each if _ > 100 then null else _, type number})",
+                "in",
+                "    #\"Fixed Invalid %\""
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"movies_data\"]"
+      }
+    ]
+  }
+}
