@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
   "name": "talent_v09",
   "position": {
-    "x": 1028,
+    "x": 904,
     "y": 14,
     "z": 0,
     "width": 118,
@@ -44,7 +44,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Talent'"
+                  "Value": "'Financial'"
                 }
               }
             },
@@ -91,7 +91,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1B2A41'"
+                      "Value": "'#1F6FB2'"
                     }
                   }
                 }
@@ -132,7 +132,7 @@
             "navigationSection": {
               "expr": {
                 "Literal": {
-                  "Value": "'talent'"
+                  "Value": "'financial'"
                 }
               }
             }

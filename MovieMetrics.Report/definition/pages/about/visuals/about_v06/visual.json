@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
   "name": "about_v06",
   "position": {
-    "x": 20,
-    "y": 480,
+    "x": 1020,
+    "y": 340,
     "z": 0,
     "width": 240,
     "height": 50
@@ -44,7 +44,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'About Us'"
+                  "Value": "'Film Details'"
                 }
               }
             },
@@ -91,7 +91,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1B2A41'"
+                      "Value": "'#1F6FB2'"
                     }
                   }
                 }
@@ -132,7 +132,7 @@
             "navigationSection": {
               "expr": {
                 "Literal": {
-                  "Value": "'about'"
+                  "Value": "'details'"
                 }
               }
             }

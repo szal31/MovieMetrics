@@ -1,12 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
-  "name": "about_v08",
+  "name": "talent_v11",
   "position": {
-    "x": 520,
-    "y": 480,
+    "x": 1152,
+    "y": 14,
     "z": 0,
-    "width": 240,
-    "height": 50
+    "width": 118,
+    "height": 32
   },
   "visual": {
     "visualType": "actionButton",
@@ -44,7 +44,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Financial and Award Analysis'"
+                  "Value": "'Film Details'"
                 }
               }
             },
@@ -132,7 +132,7 @@
             "navigationSection": {
               "expr": {
                 "Literal": {
-                  "Value": "'financial'"
+                  "Value": "'details'"
                 }
               }
             }

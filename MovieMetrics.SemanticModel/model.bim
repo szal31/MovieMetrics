@@ -242,6 +242,11 @@
             "name": "Top 10 Actor Box Office",
             "expression": "IF(ISINSCOPE(movies_data[Actor 1]) && RANKX(ALLSELECTED(movies_data[Actor 1]), [Total Box Office]) <= 10, [Total Box Office])",
             "formatString": "\\$#,0"
+          },
+          {
+            "name": "Top 10 Actor Median ROI",
+            "expression": "VAR eligible = FILTER(ALLSELECTED(movies_data[Actor 1]), CALCULATE(COUNTROWS(movies_data)) >= 5) RETURN IF(ISINSCOPE(movies_data[Actor 1]) && COUNTROWS(movies_data) >= 5 && RANKX(eligible, [Median ROI]) <= 10, [Median ROI])",
+            "formatString": "#,0.0\"%\""
           }
         ],
         "partitions": [

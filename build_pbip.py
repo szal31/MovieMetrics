@@ -83,6 +83,9 @@ measures = [
     ("Median ROI (25+ films)", "IF(COUNTROWS(movies_data) >= 25, [Median ROI])", PCT),
     ("Top 10 Director Box Office", "IF(ISINSCOPE(movies_data[Director]) && RANKX(ALLSELECTED(movies_data[Director]), [Total Box Office]) <= 10, [Total Box Office])", "\\$#,0"),
     ("Top 10 Actor Box Office", "IF(ISINSCOPE(movies_data[Actor 1]) && RANKX(ALLSELECTED(movies_data[Actor 1]), [Total Box Office]) <= 10, [Total Box Office])", "\\$#,0"),
+    # 5+ films so a single lucky film (e.g. Paranormal Activity) can't top the ROI ranking
+    ("Top 10 Actor Median ROI", "VAR eligible = FILTER(ALLSELECTED(movies_data[Actor 1]), CALCULATE(COUNTROWS(movies_data)) >= 5) "
+     "RETURN IF(ISINSCOPE(movies_data[Actor 1]) && COUNTROWS(movies_data) >= 5 && RANKX(eligible, [Median ROI]) <= 10, [Median ROI])", PCT),
 ]
 model = {"compatibilityLevel": 1567, "model": {
     "culture": "en-US", "defaultPowerBIDataSourceVersion": "powerBI_V3",
@@ -150,10 +153,6 @@ pages = {
             ("Pages: Main Overview - Financial and Award Analysis - Talent Analysis - Film Details", {"fontSize": "13pt"}),
             ("How to use: pick a genre, decade, budget level or IMDb level in the slicers on the left of each page. Click any bar or slice to filter the other charts. Hover over a chart to see exact values.", {"fontSize": "13pt"}),
         ]),
-        card((20, 330, 300, 120), "Total Movies", "Movies"),
-        card((340, 330, 300, 120), "Total Box Office", "Total Box Office"),
-        card((660, 330, 300, 120), "Total Earnings", "Total Earnings"),
-        card((980, 330, 280, 120), "Median ROI", "Median ROI"),
     ]),
     "overview": ("Main Overview", [
         header("Main Overview"),
@@ -201,9 +200,12 @@ pages = {
         visual("clusteredBarChart", (210, 70, 520, 640), "Top 10 Directors by Total Box Office",
                {"Category": [col("Director")], "Y": [mea("Top 10 Director Box Office")]},
                [(mea("Top 10 Director Box Office"), "Descending")], {**LABELS, **colour(BLUE)}),
-        visual("clusteredBarChart", (740, 70, 530, 640), "Top 10 Lead Actors by Total Box Office",
+        visual("clusteredBarChart", (740, 70, 530, 315), "Top 10 Lead Actors by Total Box Office",
                {"Category": [col("Actor 1")], "Y": [mea("Top 10 Actor Box Office")]},
                [(mea("Top 10 Actor Box Office"), "Descending")], {**LABELS, **colour(ORANGE)}),
+        visual("clusteredBarChart", (740, 395, 530, 315), "Top 10 Lead Actors by Median ROI (actors with 5+ films)",
+               {"Category": [col("Actor 1")], "Y": [mea("Top 10 Actor Median ROI")]},
+               [(mea("Top 10 Actor Median ROI"), "Descending")], {**LABELS, **colour(ORANGE)}),
     ]),
     "details": ("Film Details", [
         header("Film Details"),
@@ -257,7 +259,7 @@ for pid in DASH:
     visuals = pages[pid][1]
     big = pid == "about"
     w, h, gap = (240, 50, 10) if big else (118, 32, 6)
-    x0, y = (20, 480) if big else (1270 - 5 * w - 4 * gap, 14)
+    x0, y = (20, 340) if big else (1270 - 5 * w - 4 * gap, 14)
     for i, target in enumerate(DASH):
         name = pages[target][0]
         short = {"about": "About Us", "overview": "Overview", "financial": "Financial", "talent": "Talent", "details": "Film Details"}

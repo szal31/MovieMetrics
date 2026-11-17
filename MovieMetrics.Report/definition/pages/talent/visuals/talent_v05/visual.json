@@ -6,7 +6,7 @@
     "y": 70,
     "z": 0,
     "width": 530,
-    "height": 640
+    "height": 315
   },
   "visual": {
     "visualType": "clusteredBarChart",
