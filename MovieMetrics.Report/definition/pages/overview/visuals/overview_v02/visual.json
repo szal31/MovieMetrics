@@ -3,10 +3,10 @@
   "name": "overview_v02",
   "position": {
     "x": 10,
-    "y": 380,
+    "y": 170,
     "z": 0,
     "width": 190,
-    "height": 510
+    "height": 360
   },
   "visual": {
     "visualType": "slicer",

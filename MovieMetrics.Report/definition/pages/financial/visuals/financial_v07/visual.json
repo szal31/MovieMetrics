@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
   "name": "financial_v07",
   "position": {
-    "x": 560,
+    "x": 210,
     "y": 390,
     "z": 0,
-    "width": 340,
+    "width": 260,
     "height": 320
   },
   "visual": {
@@ -40,11 +40,11 @@
                       "Entity": "movies_data"
                     }
                   },
-                  "Property": "Median ROI"
+                  "Property": "Total Movies"
                 }
               },
-              "queryRef": "movies_data.Median ROI",
-              "nativeQueryRef": "Median ROI"
+              "queryRef": "movies_data.Total Movies",
+              "nativeQueryRef": "Total Movies"
             }
           ]
         }
@@ -76,6 +76,13 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
                 }
               }
             }
@@ -114,7 +121,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Median ROI by IMDb Category'"
+                  "Value": "'Films by IMDb Category'"
                 }
               }
             },

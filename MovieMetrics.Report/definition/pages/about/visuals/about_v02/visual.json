@@ -3,139 +3,81 @@
   "name": "about_v02",
   "position": {
     "x": 20,
-    "y": 340,
+    "y": 420,
     "z": 0,
-    "width": 240,
-    "height": 50
+    "width": 1240,
+    "height": 280
   },
   "visual": {
-    "visualType": "actionButton",
+    "visualType": "textbox",
     "objects": {
-      "icon": [
+      "general": [
         {
           "properties": {
-            "shapeType": {
-              "expr": {
-                "Literal": {
-                  "Value": "'blank'"
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
-          }
-        }
-      ],
-      "text": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            }
-          }
-        },
-        {
-          "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'About Us'"
-                }
-              }
-            },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#FFFFFF'"
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "What each page shows",
+                    "textStyle": {
+                      "fontSize": "16pt",
+                      "fontWeight": "bold"
                     }
                   }
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "10D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
-          }
-        }
-      ],
-      "fill": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            }
-          }
-        },
-        {
-          "properties": {
-            "fillColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#1B2A41'"
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Main Overview: headline figures, box office and median ROI by genre, and budget and ROI over the decades.",
+                    "textStyle": {
+                      "fontSize": "13pt"
                     }
                   }
-                }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Financial and Award Analysis: loss rate and ROI by budget level, budget against box office, and results by IMDb rating and award status.",
+                    "textStyle": {
+                      "fontSize": "13pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Talent Analysis: the top 10 directors and lead actors by box office, and the lead actors with the highest median ROI.",
+                    "textStyle": {
+                      "fontSize": "13pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Film Details: every film with its budget, box office, earnings, ROI and IMDb score.",
+                    "textStyle": {
+                      "fontSize": "13pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Data source: Oliva, D. (2024). Movies (IMDb, Earnings and more) [Data set]. Kaggle.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#5B6770"
+                    }
+                  }
+                ]
               }
-            },
-            "transparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
-          }
-        }
-      ]
-    },
-    "visualContainerObjects": {
-      "visualLink": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "type": {
-              "expr": {
-                "Literal": {
-                  "Value": "'PageNavigation'"
-                }
-              }
-            },
-            "navigationSection": {
-              "expr": {
-                "Literal": {
-                  "Value": "'about'"
-                }
-              }
-            }
+            ]
           }
         }
       ]

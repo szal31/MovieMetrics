@@ -2,77 +2,74 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
   "name": "overview_v11",
   "position": {
-    "x": 656,
-    "y": 14,
+    "x": 740,
+    "y": 620,
     "z": 0,
-    "width": 118,
-    "height": 32
+    "width": 530,
+    "height": 270
   },
   "visual": {
-    "visualType": "actionButton",
-    "objects": {
-      "icon": [
-        {
-          "properties": {
-            "shapeType": {
-              "expr": {
-                "Literal": {
-                  "Value": "'blank'"
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
-          }
-        }
-      ],
-      "text": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            }
-          }
-        },
-        {
-          "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'About Us'"
-                }
-              }
-            },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#FFFFFF'"
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "movies_data"
                     }
-                  }
+                  },
+                  "Property": "Decade"
                 }
+              },
+              "queryRef": "movies_data.Decade",
+              "nativeQueryRef": "Decade"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "movies_data"
+                    }
+                  },
+                  "Property": "Median ROI (25+ films)"
+                }
+              },
+              "queryRef": "movies_data.Median ROI (25+ films)",
+              "nativeQueryRef": "Median ROI (25+ films)"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "movies_data"
+                  }
+                },
+                "Property": "Decade"
               }
             },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "10D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
+            "direction": "Ascending"
           }
-        }
-      ],
-      "fill": [
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "labels": [
         {
           "properties": {
             "show": {
@@ -83,10 +80,12 @@
               }
             }
           }
-        },
+        }
+      ],
+      "dataPoint": [
         {
           "properties": {
-            "fillColor": {
+            "fill": {
               "solid": {
                 "color": {
                   "expr": {
@@ -96,23 +95,13 @@
                   }
                 }
               }
-            },
-            "transparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
             }
-          },
-          "selector": {
-            "id": "default"
           }
         }
       ]
     },
     "visualContainerObjects": {
-      "visualLink": [
+      "title": [
         {
           "properties": {
             "show": {
@@ -122,17 +111,35 @@
                 }
               }
             },
-            "type": {
+            "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'PageNavigation'"
+                  "Value": "'Median ROI by Decade (decades with 25+ films)'"
                 }
               }
             },
-            "navigationSection": {
+            "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'about'"
+                  "Value": "12D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1B2A41'"
+                    }
+                  }
                 }
               }
             }

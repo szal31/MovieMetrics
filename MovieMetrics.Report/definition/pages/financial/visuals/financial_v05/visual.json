@@ -2,14 +2,14 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
   "name": "financial_v05",
   "position": {
-    "x": 740,
+    "x": 475,
     "y": 70,
     "z": 0,
-    "width": 530,
+    "width": 255,
     "height": 310
   },
   "visual": {
-    "visualType": "scatterChart",
+    "visualType": "clusteredColumnChart",
     "query": {
       "queryState": {
         "Category": {
@@ -22,29 +22,11 @@
                       "Entity": "movies_data"
                     }
                   },
-                  "Property": "Movie"
+                  "Property": "Budget Category"
                 }
               },
-              "queryRef": "movies_data.Movie",
-              "nativeQueryRef": "Movie"
-            }
-          ]
-        },
-        "X": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "movies_data"
-                    }
-                  },
-                  "Property": "Total Budget"
-                }
-              },
-              "queryRef": "movies_data.Total Budget",
-              "nativeQueryRef": "Total Budget"
+              "queryRef": "movies_data.Budget Category",
+              "nativeQueryRef": "Budget Category"
             }
           ]
         },
@@ -58,17 +40,48 @@
                       "Entity": "movies_data"
                     }
                   },
-                  "Property": "Total Box Office"
+                  "Property": "Median ROI"
                 }
               },
-              "queryRef": "movies_data.Total Box Office",
-              "nativeQueryRef": "Total Box Office"
+              "queryRef": "movies_data.Median ROI",
+              "nativeQueryRef": "Median ROI"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "movies_data"
+                  }
+                },
+                "Property": "Budget Category"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
       }
     },
     "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
       "dataPoint": [
         {
           "properties": {
@@ -101,7 +114,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Budget against Box Office'"
+                  "Value": "'Median ROI by Budget Category'"
                 }
               }
             },

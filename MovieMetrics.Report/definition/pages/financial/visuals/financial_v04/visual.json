@@ -5,11 +5,11 @@
     "x": 210,
     "y": 70,
     "z": 0,
-    "width": 520,
+    "width": 255,
     "height": 310
   },
   "visual": {
-    "visualType": "lineClusteredColumnComboChart",
+    "visualType": "clusteredColumnChart",
     "query": {
       "queryState": {
         "Category": {
@@ -45,24 +45,6 @@
               },
               "queryRef": "movies_data.Loss %",
               "nativeQueryRef": "Loss %"
-            }
-          ]
-        },
-        "Y2": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "movies_data"
-                    }
-                  },
-                  "Property": "Median ROI"
-                }
-              },
-              "queryRef": "movies_data.Median ROI",
-              "nativeQueryRef": "Median ROI"
             }
           ]
         }
@@ -132,7 +114,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Loss % and Median ROI by Budget Category'"
+                  "Value": "'Loss % by Budget Category'"
                 }
               }
             },

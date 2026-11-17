@@ -17,7 +17,7 @@ DSC651 Data Visualization group project. MovieMetrics is a Power BI dashboard th
 
 1. **About Us**: what the dashboard is for and how to use it
 2. **Main Overview**: KPI cards, box office and median ROI by genre, trends by decade
-3. **Financial and Award Analysis**: loss rate by budget level, budget against box office, IMDb and award comparisons
+3. **Financial and Award Analysis**: loss rate and median ROI by budget level, budget against box office, and results by IMDb rating and award status (each chart shows one measure on one axis)
 4. **Talent Analysis**: top 10 directors and lead actors by box office, and top 10 lead actors by median ROI (actors with 5+ films)
 5. **Film Details**: a table of every film
 6. **EDA (Chapter 3)**: the descriptive charts used in Chapter 3 (not part of the dashboard navigation)

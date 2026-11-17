@@ -72,6 +72,19 @@
           }
         }
       ],
+      "outline": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
       "fill": [
         {
           "properties": {

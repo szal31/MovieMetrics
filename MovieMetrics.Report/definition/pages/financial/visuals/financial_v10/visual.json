@@ -2,77 +2,74 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
   "name": "financial_v10",
   "position": {
-    "x": 780,
-    "y": 14,
+    "x": 1015,
+    "y": 390,
     "z": 0,
-    "width": 118,
-    "height": 32
+    "width": 255,
+    "height": 320
   },
   "visual": {
-    "visualType": "actionButton",
-    "objects": {
-      "icon": [
-        {
-          "properties": {
-            "shapeType": {
-              "expr": {
-                "Literal": {
-                  "Value": "'blank'"
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
-          }
-        }
-      ],
-      "text": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            }
-          }
-        },
-        {
-          "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Overview'"
-                }
-              }
-            },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#FFFFFF'"
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "movies_data"
                     }
-                  }
+                  },
+                  "Property": "Award Status"
                 }
+              },
+              "queryRef": "movies_data.Award Status",
+              "nativeQueryRef": "Award Status"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "movies_data"
+                    }
+                  },
+                  "Property": "Loss %"
+                }
+              },
+              "queryRef": "movies_data.Loss %",
+              "nativeQueryRef": "Loss %"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "movies_data"
+                  }
+                },
+                "Property": "Award Status"
               }
             },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "10D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
+            "direction": "Ascending"
           }
-        }
-      ],
-      "fill": [
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "labels": [
         {
           "properties": {
             "show": {
@@ -83,10 +80,12 @@
               }
             }
           }
-        },
+        }
+      ],
+      "dataPoint": [
         {
           "properties": {
-            "fillColor": {
+            "fill": {
               "solid": {
                 "color": {
                   "expr": {
@@ -96,23 +95,13 @@
                   }
                 }
               }
-            },
-            "transparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
             }
-          },
-          "selector": {
-            "id": "default"
           }
         }
       ]
     },
     "visualContainerObjects": {
-      "visualLink": [
+      "title": [
         {
           "properties": {
             "show": {
@@ -122,17 +111,35 @@
                 }
               }
             },
-            "type": {
+            "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'PageNavigation'"
+                  "Value": "'Loss % by Award Status'"
                 }
               }
             },
-            "navigationSection": {
+            "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'overview'"
+                  "Value": "12D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1B2A41'"
+                    }
+                  }
                 }
               }
             }

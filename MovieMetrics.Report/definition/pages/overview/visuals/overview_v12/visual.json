@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
   "name": "overview_v12",
   "position": {
-    "x": 780,
+    "x": 656,
     "y": 14,
     "z": 0,
     "width": 118,
@@ -44,7 +44,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Overview'"
+                  "Value": "'About Us'"
                 }
               }
             },
@@ -72,6 +72,19 @@
           }
         }
       ],
+      "outline": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
       "fill": [
         {
           "properties": {
@@ -91,7 +104,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1B2A41'"
+                      "Value": "'#1F6FB2'"
                     }
                   }
                 }
@@ -132,7 +145,7 @@
             "navigationSection": {
               "expr": {
                 "Literal": {
-                  "Value": "'overview'"
+                  "Value": "'about'"
                 }
               }
             }

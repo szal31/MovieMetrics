@@ -2,14 +2,14 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
   "name": "financial_v06",
   "position": {
-    "x": 210,
-    "y": 390,
+    "x": 740,
+    "y": 70,
     "z": 0,
-    "width": 340,
-    "height": 320
+    "width": 530,
+    "height": 310
   },
   "visual": {
-    "visualType": "donutChart",
+    "visualType": "scatterChart",
     "query": {
       "queryState": {
         "Category": {
@@ -22,11 +22,29 @@
                       "Entity": "movies_data"
                     }
                   },
-                  "Property": "IMDb Category"
+                  "Property": "Movie"
                 }
               },
-              "queryRef": "movies_data.IMDb Category",
-              "nativeQueryRef": "IMDb Category"
+              "queryRef": "movies_data.Movie",
+              "nativeQueryRef": "Movie"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "movies_data"
+                    }
+                  },
+                  "Property": "Total Budget"
+                }
+              },
+              "queryRef": "movies_data.Total Budget",
+              "nativeQueryRef": "Total Budget"
             }
           ]
         },
@@ -40,49 +58,67 @@
                       "Entity": "movies_data"
                     }
                   },
-                  "Property": "Total Movies"
+                  "Property": "Total Box Office"
                 }
               },
-              "queryRef": "movies_data.Total Movies",
-              "nativeQueryRef": "Total Movies"
+              "queryRef": "movies_data.Total Box Office",
+              "nativeQueryRef": "Total Box Office"
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "movies_data"
-                  }
-                },
-                "Property": "IMDb Category"
-              }
-            },
-            "direction": "Ascending"
-          }
-        ],
-        "isDefaultSort": true
       }
     },
     "objects": {
-      "labels": [
+      "dataPoint": [
         {
           "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1F6FB2'"
+                    }
+                  }
                 }
               }
-            },
-            "labelStyle": {
+            }
+          }
+        }
+      ],
+      "bubbles": [
+        {
+          "properties": {
+            "bubbleSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'Category, percent of total'"
+                  "Value": "-8L"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1000000D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1000000D"
                 }
               }
             }
@@ -104,7 +140,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Share of Films by IMDb Category'"
+                  "Value": "'Budget against Box Office (one dot per film, $M)'"
                 }
               }
             },

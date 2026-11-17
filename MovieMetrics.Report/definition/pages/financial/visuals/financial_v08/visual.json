@@ -2,14 +2,14 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
   "name": "financial_v08",
   "position": {
-    "x": 910,
+    "x": 480,
     "y": 390,
     "z": 0,
-    "width": 360,
+    "width": 260,
     "height": 320
   },
   "visual": {
-    "visualType": "lineClusteredColumnComboChart",
+    "visualType": "clusteredColumnChart",
     "query": {
       "queryState": {
         "Category": {
@@ -22,11 +22,11 @@
                       "Entity": "movies_data"
                     }
                   },
-                  "Property": "Award Status"
+                  "Property": "IMDb Category"
                 }
               },
-              "queryRef": "movies_data.Award Status",
-              "nativeQueryRef": "Award Status"
+              "queryRef": "movies_data.IMDb Category",
+              "nativeQueryRef": "IMDb Category"
             }
           ]
         },
@@ -40,29 +40,11 @@
                       "Entity": "movies_data"
                     }
                   },
-                  "Property": "Median Earnings"
+                  "Property": "Median ROI"
                 }
               },
-              "queryRef": "movies_data.Median Earnings",
-              "nativeQueryRef": "Median Earnings"
-            }
-          ]
-        },
-        "Y2": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "movies_data"
-                    }
-                  },
-                  "Property": "Loss %"
-                }
-              },
-              "queryRef": "movies_data.Loss %",
-              "nativeQueryRef": "Loss %"
+              "queryRef": "movies_data.Median ROI",
+              "nativeQueryRef": "Median ROI"
             }
           ]
         }
@@ -77,7 +59,7 @@
                     "Entity": "movies_data"
                   }
                 },
-                "Property": "Award Status"
+                "Property": "IMDb Category"
               }
             },
             "direction": "Ascending"
@@ -132,7 +114,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Earnings and Loss % by Award Status'"
+                  "Value": "'Median ROI by IMDb Category'"
                 }
               }
             },

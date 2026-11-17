@@ -137,11 +137,14 @@ def slicer(pos, field, title, dropdown=False):
     obj = {"data": [{"properties": {"mode": lit("'Dropdown'")}}]} if dropdown else None
     return visual("slicer", pos, title, {"Values": [col(field)]}, objects=obj)
 def card(pos, measure, title):
-    return visual("card", pos, title, {"Values": [mea(measure)]})
-def combo(pos, title, cat, y, y2, sort):
-    return visual("lineClusteredColumnComboChart", pos, title,
-                  {"Category": [col(cat)], "Y": [mea(y)], "Y2": [mea(y2)]}, sort,
-                  {**LABELS, **colour(BLUE)})
+    # the title already names the number, so the label under it is switched off
+    return visual("card", pos, title, {"Values": [mea(measure)]},
+                  objects={"categoryLabels": [{"properties": {"show": lit("false")}}]})
+def column(pos, title, cat, measure, vtype="clusteredColumnChart"):
+    # one measure, one axis: two-measure comparisons are two charts side by side
+    labels = {"labels": [{"properties": {"show": lit("true"), "labelDisplayUnits": lit("1D")}}]} if measure == "Total Movies" else LABELS
+    return visual(vtype, pos, title, {"Category": [col(cat)], "Y": [mea(measure)]},
+                  [(col(cat), "Ascending")], {**labels, **colour(BLUE)})
 
 pages = {
     "about": ("About Us", [
@@ -150,14 +153,21 @@ pages = {
             ("About this dashboard", {"fontSize": "16pt", "fontWeight": "bold"}),
             ("MovieMetrics helps studio executives, producers, investors, directors and marketing managers see which films made money in the past, so they can plan new films with less risk.", {"fontSize": "13pt"}),
             ("Dataset: 3,907 movies after cleaning (3,974 raw records), released between 1929 and 2016, with 16 original attributes and 6 derived variables.", {"fontSize": "13pt"}),
-            ("Pages: Main Overview - Financial and Award Analysis - Talent Analysis - Film Details", {"fontSize": "13pt"}),
-            ("How to use: pick a genre, decade, budget level or IMDb level in the slicers on the left of each page. Click any bar or slice to filter the other charts. Hover over a chart to see exact values.", {"fontSize": "13pt"}),
+            ("How to use: pick a genre, decade, budget level or IMDb level in the slicers on the left of each page. Click any bar to filter the other charts. Hover over a chart to see exact values.", {"fontSize": "13pt"}),
+        ]),
+        textbox((20, 420, 1240, 280), [
+            ("What each page shows", {"fontSize": "16pt", "fontWeight": "bold"}),
+            ("Main Overview: headline figures, box office and median ROI by genre, and budget and ROI over the decades.", {"fontSize": "13pt"}),
+            ("Financial and Award Analysis: loss rate and ROI by budget level, budget against box office, and results by IMDb rating and award status.", {"fontSize": "13pt"}),
+            ("Talent Analysis: the top 10 directors and lead actors by box office, and the lead actors with the highest median ROI.", {"fontSize": "13pt"}),
+            ("Film Details: every film with its budget, box office, earnings, ROI and IMDb score.", {"fontSize": "13pt"}),
+            ("Data source: Oliva, D. (2024). Movies (IMDb, Earnings and more) [Data set]. Kaggle.", {"fontSize": "11pt", "color": "#5B6770"}),
         ]),
     ]),
     "overview": ("Main Overview", [
         header("Main Overview"),
-        slicer((10, 70, 190, 300), "Genre", "Genre"),
-        slicer((10, 380, 190, 510), "Decade", "Decade"),
+        slicer((10, 70, 190, 90), "Genre", "Genre", dropdown=True),
+        slicer((10, 170, 190, 360), "Decade", "Decade"),
         card((210, 70, 205, 100), "Total Movies", "Total Movies"),
         card((423, 70, 205, 100), "Total Box Office", "Total Box Office"),
         card((636, 70, 205, 100), "Total Earnings", "Total Earnings"),
@@ -169,48 +179,46 @@ pages = {
         visual("clusteredBarChart", (740, 180, 530, 430), "Median ROI by Genre (genres with 25+ films)",
                {"Category": [col("Genre")], "Y": [mea("Median ROI (25+ films)")]},
                [(mea("Median ROI (25+ films)"), "Descending")], {**LABELS, **colour(BLUE)}),
-        combo((210, 620, 1060, 270), "Median Budget and Median ROI by Decade (ROI shown for decades with 25+ films)",
-              "Decade", "Median Budget", "Median ROI (25+ films)", [(col("Decade"), "Ascending")]),
+        column((210, 620, 520, 270), "Median Budget by Decade", "Decade", "Median Budget"),
+        column((740, 620, 530, 270), "Median ROI by Decade (decades with 25+ films)", "Decade", "Median ROI (25+ films)", "lineChart"),
     ]),
     "financial": ("Financial and Award Analysis", [
         header("Financial and Award Analysis"),
-        slicer((10, 70, 190, 300), "Genre", "Genre"),
-        slicer((10, 380, 190, 160), "Budget Category", "Budget Category"),
-        slicer((10, 550, 190, 160), "IMDb Category", "IMDb Category"),
-        combo((210, 70, 520, 310), "Loss % and Median ROI by Budget Category",
-              "Budget Category", "Loss %", "Median ROI", [(col("Budget Category"), "Ascending")]),
-        visual("scatterChart", (740, 70, 530, 310), "Budget against Box Office",
+        slicer((10, 70, 190, 90), "Genre", "Genre", dropdown=True),
+        slicer((10, 170, 190, 160), "Budget Category", "Budget Category"),
+        slicer((10, 340, 190, 160), "IMDb Category", "IMDb Category"),
+        column((210, 70, 255, 310), "Loss % by Budget Category", "Budget Category", "Loss %"),
+        column((475, 70, 255, 310), "Median ROI by Budget Category", "Budget Category", "Median ROI"),
+        visual("scatterChart", (740, 70, 530, 310), "Budget against Box Office (one dot per film, $M)",
                {"Category": [col("Movie")], "X": [mea("Total Budget")], "Y": [mea("Total Box Office")]},
-               objects=colour(BLUE)),
-        visual("donutChart", (210, 390, 340, 320), "Share of Films by IMDb Category",
-               {"Category": [col("IMDb Category")], "Y": [mea("Total Movies")]},
-               [(col("IMDb Category"), "Ascending")],
-               {"labels": [{"properties": {"show": lit("true"), "labelStyle": lit("'Category, percent of total'")}}]}),
-        visual("clusteredColumnChart", (560, 390, 340, 320), "Median ROI by IMDb Category",
-               {"Category": [col("IMDb Category")], "Y": [mea("Median ROI")]},
-               [(col("IMDb Category"), "Ascending")], {**LABELS, **colour(BLUE)}),
-        combo((910, 390, 360, 320), "Earnings and Loss % by Award Status",
-              "Award Status", "Median Earnings", "Loss %", [(col("Award Status"), "Ascending")]),
+               objects={**colour(BLUE),
+                        "bubbles": [{"properties": {"bubbleSize": lit("-8L")}}],  # smaller dots so the dense corner reads
+                        "categoryAxis": [{"properties": {"labelDisplayUnits": lit("1000000D")}}],
+                        "valueAxis": [{"properties": {"labelDisplayUnits": lit("1000000D")}}]}),
+        column((210, 390, 260, 320), "Films by IMDb Category", "IMDb Category", "Total Movies"),
+        column((480, 390, 260, 320), "Median ROI by IMDb Category", "IMDb Category", "Median ROI"),
+        column((750, 390, 255, 320), "Median Earnings by Awards", "Award Status", "Median Earnings"),
+        column((1015, 390, 255, 320), "Loss % by Award Status", "Award Status", "Loss %"),
     ]),
     "talent": ("Talent Analysis", [
         header("Talent Analysis"),
-        slicer((10, 70, 190, 300), "Genre", "Genre"),
-        slicer((10, 380, 190, 90), "Director", "Director", dropdown=True),
-        slicer((10, 480, 190, 90), "Actor 1", "Lead Actor", dropdown=True),
+        slicer((10, 70, 190, 90), "Genre", "Genre", dropdown=True),
+        slicer((10, 170, 190, 90), "Director", "Director", dropdown=True),
+        slicer((10, 270, 190, 90), "Actor 1", "Lead Actor", dropdown=True),
         visual("clusteredBarChart", (210, 70, 520, 640), "Top 10 Directors by Total Box Office",
                {"Category": [col("Director")], "Y": [mea("Top 10 Director Box Office")]},
                [(mea("Top 10 Director Box Office"), "Descending")], {**LABELS, **colour(BLUE)}),
         visual("clusteredBarChart", (740, 70, 530, 315), "Top 10 Lead Actors by Total Box Office",
                {"Category": [col("Actor 1")], "Y": [mea("Top 10 Actor Box Office")]},
-               [(mea("Top 10 Actor Box Office"), "Descending")], {**LABELS, **colour(ORANGE)}),
+               [(mea("Top 10 Actor Box Office"), "Descending")], {**LABELS, **colour(BLUE)}),
         visual("clusteredBarChart", (740, 395, 530, 315), "Top 10 Lead Actors by Median ROI (actors with 5+ films)",
                {"Category": [col("Actor 1")], "Y": [mea("Top 10 Actor Median ROI")]},
-               [(mea("Top 10 Actor Median ROI"), "Descending")], {**LABELS, **colour(ORANGE)}),
+               [(mea("Top 10 Actor Median ROI"), "Descending")], {**LABELS, **colour(BLUE)}),
     ]),
     "details": ("Film Details", [
         header("Film Details"),
-        slicer((10, 70, 190, 300), "Genre", "Genre"),
-        slicer((10, 380, 190, 90), "Director", "Director", dropdown=True),
+        slicer((10, 70, 190, 90), "Genre", "Genre", dropdown=True),
+        slicer((10, 170, 190, 90), "Director", "Director", dropdown=True),
         visual("tableEx", (210, 70, 1060, 640), "Films",
                {"Values": [col(c) for c in ["Movie", "Genre", "Release year", "Director", "Budget",
                                             "Box Office", "Earnings", "ROI", "IMDb score", "Profit Status"]]},
@@ -247,6 +255,7 @@ def nav_button(pos, target, label, current):
         "text": [{"properties": {"show": lit("true")}},
                  {"properties": {"text": lit(f"'{label}'"), "fontColor": {"solid": {"color": lit("'#FFFFFF'")}},
                                  "fontSize": lit("10D")}, "selector": {"id": "default"}}],
+        "outline": [{"properties": {"show": lit("false")}}],
         "fill": [{"properties": {"show": lit("true")}},
                  {"properties": {"fillColor": {"solid": {"color": lit("'#1B2A41'" if current else f"'{BLUE}'")}},
                                  "transparency": lit("0D")}, "selector": {"id": "default"}}]})
