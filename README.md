@@ -8,6 +8,7 @@ DSC651 Data Visualization group project. MovieMetrics is a Power BI dashboard th
 |---|---|
 | `MovieMetrics.pbix` | The Power BI report. Open it in Power BI Desktop; the cleaned data is already inside, so no refresh is needed. |
 | `Chapter 3 Methodology (MovieMetrics) - FULL.docx` | Chapter 3 of the report (methodology, data preparation, EDA, features). |
+| `Chapter 4 Dashboard Design and Implementation (MovieMetrics).docx` | Chapter 4 of the report (chart choices, how each chart uses the data, layout, interface, colour, hardware and software). |
 | `movies_data.csv` | The raw dataset (3,974 rows, 16 columns). |
 | `figures/` | The Chapter 3 figures exported from the report. |
 | `MovieMetrics.pbip`, `MovieMetrics.Report/`, `MovieMetrics.SemanticModel/` | The same report as a Power BI project (text files, easier to compare between versions). |
